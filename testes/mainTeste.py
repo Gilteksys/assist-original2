@@ -1,0 +1,60 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QFrame, QGridLayout
+from PyQt5.QtCore import Qt
+from cadastro_cliente import CadastroClienteWindow
+from ordem_servico import OrdemServicoWindow
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("ASSIST-2.8")
+        self.setGeometry(100, 100, 1200, 800)
+
+        main_widget = QWidget()
+        self.setCentralWidget(main_widget)
+
+        layout = QVBoxLayout(main_widget)
+        layout.setAlignment(Qt.AlignTop | Qt.AlignLeft)
+
+        grid_layout = QGridLayout()
+        layout.addLayout(grid_layout)
+
+        line = QFrame()
+        line.setFrameShape(QFrame.HLine)
+        layout.addWidget(line)
+
+        line_2 = QFrame()
+        line_2.setFrameShape(QFrame.VLine)
+        layout.addWidget(line_2)
+        
+
+
+        button_cadastrar_cliente = QPushButton("Cadastrar Cliente")
+        button_cadastrar_cliente.clicked.connect(self.on_cadastrar_cliente_clicked)
+        grid_layout.addWidget(button_cadastrar_cliente, 1,0)
+
+        button_ordem_servico = QPushButton("Ordem de Serviço")
+        button_ordem_servico.clicked.connect(self.on_ordem_servico_clicked)
+        grid_layout.addWidget(button_ordem_servico, 1, 1)
+
+    def on_cadastrar_cliente_clicked(self):
+        self.cadastro_cliente_window = CadastroClienteWindow()
+        self.cadastro_cliente_window.show()
+
+    def on_ordem_servico_clicked(self):
+        self.ordem_servico_window = OrdemServicoWindow()
+        self.ordem_servico_window.show()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
+
+
+
+
+
+
+

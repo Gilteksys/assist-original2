@@ -1,0 +1,30 @@
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QCalendarWidget
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle('Minha Janela Personalizada')
+        self.setGeometry(100, 100, 800, 600)
+
+        self.calendar = QCalendarWidget(self)
+        self.calendar.setGeometry(10, 10, 200, 200)
+        self.calendar.hide()
+
+        self.calendar_button = QPushButton('Mostrar Calendário', self)
+        self.calendar_button.setGeometry(10, 220, 200, 30)
+        self.calendar_button.clicked.connect(self.toggle_calendar)
+
+    def toggle_calendar(self):
+        if self.calendar.isVisible():
+            self.calendar.hide()
+            self.calendar_button.setText('Mostrar Calendário')
+        else:
+            self.calendar.show()
+            self.calendar_button.setText('Ocultar Calendário')
+
+if __name__ == '__main__':
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
